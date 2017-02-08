@@ -82,6 +82,42 @@
 		场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，
 			参考版本回退一节，不过前提是没有推送到远程库。
 
+7.删除文件
+	a.正常删除（从版本库中删除文件）
+		第一步：git rm XXX( XXX 需要删除的文件名 )
+		第二步：git commit -m "这里填操作说明"
+	b.错误删除（操作失误，删除错误）
+		git checkout -- XXXX （XXXX 要恢复的文件名）具体说明请看上一节 “6.撤销修改”
+			小注：git checkout其实是用版本库里的版本替换工作区的版本，
+				无论工作区是修改还是删除，都可以“一键还原”。
+	注：命令git rm用于删除一个文件。如果一个文件已经被提交到版本库，
+		那么你永远不用担心误删，但是要小心，你只能恢复文件到最新版本，
+		你会丢失最近一次提交后你修改的内容
 
+8.远程仓库
+	a.创建一个 gitHub 仓库( 链接本地Git和GitHub的前期设置 )
+		第一步：创建一个gitHub账号（免费）缺点：所有人都可以看到
+		第二步：创建SSH Key ( 本地Git仓库和GitHub仓库之间的传输是通过SSH加密的 )
+				Linux：打开 Shell
+				Windows：打开Git Bash
+				输入：ssh-keygen -t rsa -C "youremail@example.com"
+				无报错可在用户主目录找到 “.ssh”目录，里面有id_resa和id_rsa.pub
+				两个文件，
+				id_rsa:私匙（不能泄露）
+				id_rsa.pub:公匙（可以放心告诉任何人）
+		第三步：设置SSH Key （即在GitHub中设置你的ＳＳＨ　Ｋｅｙ）
+				打开　"Account settings", "SSH Keys" 页面，
+				点击Add SSH Key
+					Title （内容任意无实质性要求）
+					Key （输入id_rsa.pub 文件内容 （建议复制粘贴））
+		小注：1.为什么GitHub需要SSH Key呢？因为GitHub需要识别出你推送的提交确实是你推送的，
+			而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，
+			就可以确认只有你自己才能推送
+		      2.GitHub允许你添加多个Key。假定你有若干电脑，你一会儿在公司提交，
+		        一会儿在家里提交，只要把每台电脑的Key都添加到GitHub，
+			就可以在每台电脑上往GitHub推送了。
+		      3.如何使比人看不到自己的Git库。
+		      	a.给GitHub公司交钱，把公有仓库变为私有。
+			b.自己搭建一个自己的 Git服务器。
 
-
+	b.添加远程仓库
