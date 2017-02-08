@@ -120,13 +120,27 @@
 		      	a.给GitHub公司交钱，把公有仓库变为私有。
 			b.自己搭建一个自己的 Git服务器。
 
-	b.添加远程仓库
+	b.添加远程仓库 （先有本地再有远程）
 		第一步：添加远程仓库（在github中）
 			完成后记住仓库名即可（其实也可以后期在查，只是我们推送只需要仓库名）
 
 		第二步：关联本地仓库和网路仓库
 			git remote add XXX git@github.com:***/++++.git
-				XXX 远程库的名字，推荐用“origin”
+				XXX 远程库访问名字，推荐用“origin”.访问时设置的名字
+					（即类似指针在变量中的意义）
 				*** 你的github账户名字
 				+++ 你刚在上一步创建的远程库名称。（记得加.git后缀）
+					  创建时设置的实际名字
+		第三步：推送
+			第一次推送：
+			   git push -u XXX *** ( XXX 远程库访问名字，*** 分支名称（master）) 
+				小注：由于远程库是空的，我们第一次推送master分支时，加上了-u参数，
+					Git不但会把本地的master分支内容推送的远程新的master分支，
+					还会把本地的master分支和远程的master分支关联起来
+			第二次及以后：
+			   git push XXX ***( XXX 远程库访问名字，*** 分支名称（master）)
+        c.从远程仓库克隆 （先有远程再有本地）
+		git clone git@github.com:XXX/***.git
+			XXX 你的github账户名字
+			*** 你在github上创建的远程仓库的名称！
 
