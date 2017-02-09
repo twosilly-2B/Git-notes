@@ -246,3 +246,44 @@
 		 使用git branch --set-upstream branch-name origin/branch-name；
 
 		从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
+10.标签管理
+	a.创建标签
+		1.默认创建标签 （默认给HEAD创建）
+			git tag v1.0 ( v1.0 为你想给的标签 )
+		2.给指定commit id 设置tag
+			git tag v0.9 0224937 
+			  ( v0.9 为你想给的标签，0224937 为你想给的commit id的前几位 )
+		3.添加标签时指定说明文字
+			$ git tag -a v0.1 -m "version 0.1 released" 3628164
+				（ 创建带有说明的标签，用-a指定标签名，-m指定说明文字，
+					3628164为你想给的commit id的前几位 ）
+		4.创建带秘钥的签名 （具体没看等有时间了再仔细研究）
+			通过-s用私钥签名一个标签：
+			$ git tag -s v0.2 -m "signed version 0.2 released" fec145a
+			签名采用PGP签名，因此，必须首先安装gpg（GnuPG），如果没有找到gpg，
+			 或者没有gpg密钥对，就会报错。
+			 如果报错，请参考GnuPG帮助文档配置Key。
+		小注：
+			命令git tag <name>用于新建一个标签，默认为HEAD，也可以指定一个commit id；
+
+			git tag -a <tagname> -m "blablabla..."可以指定标签信息；
+
+			git tag -s <tagname> -m "blablabla..."可以用PGP签名标签；
+
+			命令git tag可以查看所有标签。
+	b.查看标签
+		1.查看本分支所有标签
+			git tag
+		2.查看指定标签的详细信息
+			fit show v0.9 ( v0.9为标签名 )
+	c.删除标签
+		1.删除本地标签
+			git tag -d v0.1 ( v0.1为你要删除的标签 )
+		2.推送标签到远程
+			git push origin <tagname> ( 推送单个 )
+			git push origin --tags （推送全部尚未提交）
+		3.删除远程标签
+			第一步：删除本地标签
+				    git tag -d v0.9
+			第二步：删除远程标签
+				    git push origin :refs/tags/v0.9
