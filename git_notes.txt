@@ -156,7 +156,7 @@
 		3.查看分支
 			git branch
 				git branch命令会列出所有分支，当前分支前面会标一个*号.
-		4.合并分支
+		4.合并分支（默认 fast forward 快进模式）
 			git merge XXX　（XXX 需要和 当所在分支 合并的分支名）
 		5.删除分支
 			git branch -d XXX ( XXX 想要删除的分支名 )
@@ -167,6 +167,48 @@
 		创建+切换分支：git checkout -b <name>
 		合并某分支到当前分支：git merge <name>
 		删除分支：git branch -d <name>
-	b.解决冲突 （这个模块有点懵逼）
+	b.解决冲突 （直接进有冲突的文件里面改）
 		1.查看分支合并情况
 			git log --graph
+	c.分支管理策略
+		1.No fast forward 模式
+			git merge --no-ff -m "XXX" *** 
+				（XXX commit *** 需要和 当所在分支 合并的分支名）
+		小注：合并分支时，加上--no-ff参数就可以用普通模式合并，
+			合并后的历史有分支，能看出来曾经做过合并，
+			 而fast forward合并就看不出来曾经做过合并。
+	d.bug分支
+		1.暂停（暂停当前分支的操作“当前分支未提交就不可以进入下一分支”相当于备份一份）
+			git stash
+		2.查看暂停分支列表 （查看当前你暂停了几个分支）
+			git stash list
+		3.恢复 stash（暂停的储存） （恢复被stash的分支）
+			git stash apply
+		4.删除 stash （暂停的储存列表）
+			git stash drop
+		5.恢复并删除 stash
+			git stash pop
+	注：当手头工作没有完成时，先把工作现场git stash一下，
+		然后去修复bug，修复后，再git stash pop，回到工作现场。
+		
+		6.删除未合并分支（强行删除分支）
+			git branch -D *** ( *** 要强行删除的分支名 )
+				小注：添加一个新功能时，你肯定不希望因为一些实验性质的代码，
+					把主分支搞乱了，所以，每添加一个新功能，
+					最好新建一个feature分支，在上面开发，完成后，合并，
+					最后，删除该feature分支。
+	e.多人协作
+		1.查看原仓库信息
+			git remote  ( 大致信息 )
+			git remote -v （详细信息）
+			  小注：git remote -v -->显示了可以抓取和推送的origin的地址。
+			  	如果没有推送权限，就看不到push的地址。
+		2.推送需求说明
+			a.master分支是主分支，因此要时刻与远程同步；
+
+			b.dev分支是开发分支，团队所有成员都需要在上面工作，所以也需要与远程同步；
+
+			c.bug分支只用于在本地修复bug，就没必要推到远程了，
+			除非老板要看看你每周到底修复了几个bug；
+
+			d.feature分支是否推到远程，取决于你是否和你的小伙伴合作在上面开发。
