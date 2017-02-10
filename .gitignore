@@ -1,3 +1,6 @@
 #test 测试屏蔽文件
 sb.ini
 sb2.txt
+
+#测试忽略
+*.py
