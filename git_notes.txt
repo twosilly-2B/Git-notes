@@ -287,3 +287,45 @@
 				    git tag -d v0.9
 			第二步：删除远程标签
 				    git push origin :refs/tags/v0.9
+
+11.自定义Git
+	a.改变显示颜色
+		 git config --global color.ui true
+
+	b.忽略特殊文件
+		1.忽略方法
+		   第一步：创建 ".gitignore" 文件
+		   第二步：配置 “.gitignore” 文件
+			  1.忽略某个文件直接将文件名放入 “.gitignore” 文件即可
+			  2.忽略某类文件（可使用正则表达式）
+			  	例：
+					忽略Python编译产生的.pyc、.pyo、dist等文件或目录：
+
+					# Python:
+					*.py[cod]
+					*.so
+					*.egg
+					*.egg-info
+			   3.忽略文件夹
+			   	直接填入文件夹名字
+		 2.强制添加被忽略类型的文件
+		 	git add -f 文件名
+			 小注：-f强制添加到Git
+		 3.查看“.gitignore” 文件规则
+		 	git check-ignore -v 文件名
+		小结：
+			忽略某些文件时，需要编写.gitignore；
+
+			.gitignore文件本身要放到版本库里，并且可以对.gitignore做版本管理！
+	c.配置别名（给git 命令改）
+		git config --global alias.st status
+			（st 为你取的别名 status 为原名）
+		配置文件
+		 	配置Git的时候，加上--global是针对当前用户起作用的，
+		 	 如果不加，那只针对当前的仓库起作用。
+
+			 配置文件位置：.git/config
+			 配置别名也可以直接修改这个文件，如果改错了，
+			  可以删掉文件重新通过命令配置。
+12.搭建git服务器（这里其实是属于前面哪章的，只是我觉得重要就单独提出来了）
+	
