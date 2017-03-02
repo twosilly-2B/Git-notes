@@ -246,6 +246,7 @@
 		 使用git branch --set-upstream branch-name origin/branch-name；
 
 		从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
+
 10.标签管理
 	a.创建标签
 		1.默认创建标签 （默认给HEAD创建）
